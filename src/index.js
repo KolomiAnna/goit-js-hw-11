@@ -68,9 +68,8 @@ async function handlerSubmit(event) {
     if (!searchQuery) {
         return;
     }
-    console.log(`getPic = ${searchQuery}`);
 
-    getPic(searchQuery).then(data => {
+    getPic(q).then(data => {
         createGallery(data);
         
 
