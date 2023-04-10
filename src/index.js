@@ -11,7 +11,7 @@ const btnLoadMoreEl = document.querySelector(".load-more");
 
 let page = 1;
 let per_page = 40;
-let q; 
+let q;
 
 btnLoadMoreEl.classList.add("is-hidden");
 alertPopup.classList.add("is-hidden");
@@ -25,8 +25,8 @@ btnLoadMoreEl.addEventListener("click", () => {
     }
 
     page += 1;
-   
-  
+
+
 
     getPic(searchQuery).then(data => {
         createGallery(data);
@@ -58,9 +58,10 @@ function getPic(nameImgs) {
 
 formEl.addEventListener("submit", handlerSubmit);
 
-async function handlerSubmit(event) {
+function handlerSubmit(event) {
+   
     event.preventDefault();
-
+    galleryEl.innerHTML = "";
     const searchQuery = event.target.elements["searchQuery"].value.trim();
 
     q = searchQuery;
@@ -71,17 +72,17 @@ async function handlerSubmit(event) {
 
     getPic(q).then(data => {
         createGallery(data);
-        
 
         console.log(data.totalHits / 40);
         console.log(page);
 
-        if (!data.hits.length)
-        {
+        if (!data.hits.length) {
+
             btnLoadMoreEl.classList.add("is-hidden");
             throw new Error(Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again."));
-        } 
-    
+
+        }
+
         if (data.totalHits / 40 < page) {
             alertPopup.classList.remove("is-hidden");
         }
@@ -114,8 +115,6 @@ function createGallery(name) {
 </div>`).join("");
     galleryEl.insertAdjacentHTML("beforeend", markupName);
 };
-
-
 
 
 
